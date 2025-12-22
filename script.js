@@ -20,6 +20,7 @@ const db = getFirestore(app);
 
 const TARGET_DATE = new Date("2026-01-01T00:00:00").getTime();
 
+// DOM要素を取得
 const countdownScreen = document.getElementById("countdown-screen");
 const celebrationScreen = document.getElementById("celebration-screen");
 const mainScreen = document.getElementById("main-screen");
@@ -84,36 +85,3 @@ modal.onclick = e => {
 
 updateCountdown();
 setInterval(updateCountdown, 1000);
-
-
-// ===== デバッグ用フック =====
-window.debug = {
-  triggerNewYear() {
-    console.log("DEBUG: triggerNewYear");
-    countdownScreen.classList.remove("active");
-    celebrationScreen?.classList?.add("active");
-
-    setTimeout(() => {
-      celebrationScreen?.classList?.remove("active");
-      mainScreen.classList.add("active");
-      loadBalloons();
-    }, 3000);
-  },
-
-  skipToMain() {
-    console.log("DEBUG: skipToMain");
-    countdownScreen.classList.remove("active");
-    celebrationScreen?.classList?.remove("active");
-    mainScreen.classList.add("active");
-    loadBalloons();
-  },
-
-  logState() {
-    console.log("STATE", {
-      countdownActive: countdownScreen.classList.contains("active"),
-      mainActive: mainScreen.classList.contains("active"),
-      now: new Date(),
-      target: new Date(TARGET_DATE)
-    });
-  }
-};
