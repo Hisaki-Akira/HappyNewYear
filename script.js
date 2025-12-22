@@ -13,8 +13,8 @@ import {
 } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDPE7Lv9qxh1BqTvfESMcn1OlaI9pA-t-Q",
-  authDomain: "newyearproject-8be53.firebaseapp. com",
+  apiKey:  "AIzaSyDPE7Lv9qxh1BqTvfESMcn1OlaI9pA-t-Q",
+  authDomain: "newyearproject-8be53.firebaseapp.com",
   projectId: "newyearproject-8be53",
   storageBucket:  "newyearproject-8be53.firebasestorage. app",
   messagingSenderId: "541999984164",
@@ -46,11 +46,11 @@ const secondsEl = document.getElementById('seconds');
 
 const resolutionInput = document.getElementById('resolution-input');
 const charCountEl = document.getElementById('char-count');
-const submitBtn = document. getElementById('submit-btn');
+const submitBtn = document.getElementById('submit-btn');
 const submitMessage = document.getElementById('submit-message');
 
 const omikujiSection = document.getElementById('omikuji-section');
-const omikujiBtn = document. getElementById('omikuji-btn');
+const omikujiBtn = document.getElementById('omikuji-btn');
 const omikujiResult = document.getElementById('omikuji-result');
 
 const balloonsContainer = document.getElementById('balloons-container');
@@ -65,7 +65,7 @@ function updateCountdown() {
   const now = new Date().getTime();
   const distance = TARGET_DATE - now;
 
-  if (distance <= 0 && !hasReachedNewYear) {
+  if (distance <= 0 && ! hasReachedNewYear) {
     clearInterval(countdownInterval);
     hasReachedNewYear = true;
     showCelebration();
@@ -98,7 +98,7 @@ function showCelebration() {
       firework.className = 'firework';
       firework. style.left = Math.random() * 100 + '%';
       firework.style.top = Math.random() * 60 + '%';
-      firework. style. background = `hsl(${Math.random() * 360}, 100%, 60%)`;
+      firework. style.background = `hsl(${Math.random() * 360}, 100%, 60%)`;
       fireworksContainer.appendChild(firework);
       
       setTimeout(() => firework.remove(), 1000);
@@ -109,7 +109,7 @@ function showCelebration() {
   const confettiContainer = document.getElementById('confetti');
   for (let i = 0; i < 100; i++) {
     setTimeout(() => {
-      const confetti = document. createElement('div');
+      const confetti = document.createElement('div');
       confetti.className = 'confetti-piece';
       confetti.style.left = Math.random() * 100 + '%';
       confetti.style.background = `hsl(${Math.random() * 360}, 100%, 70%)`;
@@ -122,8 +122,8 @@ function showCelebration() {
 
   // 3秒後にメイン画面へ
   setTimeout(() => {
-    celebrationScreen. classList.remove('active');
-    mainScreen.classList. add('active');
+    celebrationScreen.classList.remove('active');
+    mainScreen.classList.add('active');
     loadBalloons();
   }, 3000);
 }
@@ -187,12 +187,12 @@ submitBtn.addEventListener('click', async () => {
     } else {
       setTimeout(() => {
         submitBtn.disabled = false;
-        submitMessage. textContent = '';
+        submitMessage.textContent = '';
       }, 2000);
     }
   } catch (error) {
     console.error('Error adding document: ', error);
-    submitMessage. textContent = 'エラーが発生しました';
+    submitMessage.textContent = 'エラーが発生しました';
     submitMessage.style.color = '#e74c3c';
     submitBtn.disabled = false;
   }
@@ -209,7 +209,7 @@ async function loadBalloons() {
     balloonsContainer.innerHTML = '';
     
     querySnapshot.forEach((doc) => {
-      const data = doc.data();
+      const data = doc. data();
       createBalloon(data.text);
     });
   } catch (error) {
@@ -247,7 +247,7 @@ modalClose.addEventListener('click', () => {
 });
 
 modal.addEventListener('click', (e) => {
-  if (e. target === modal) {
+  if (e.target === modal) {
     modal.classList.add('hidden');
   }
 });
@@ -262,7 +262,7 @@ omikujiBtn.addEventListener('click', () => {
   }
 
   const fortunes = [
-    { level: '大吉', message: '素晴らしい一年になるでしょう！夢に向かって突き進む年です。' },
+    { level:  '大吉', message: '素晴らしい一年になるでしょう！夢に向かって突き進む年です。' },
     { level: '中吉', message: '良いことがたくさん訪れます。前向きな気持ちを大切に。' },
     { level: '小吉', message: '小さな幸せが積み重なる年。感謝の心を忘れずに。' },
     { level: '吉', message: '穏やかで心地よい一年。周りの人を大切にしましょう。' },
@@ -289,15 +289,10 @@ omikujiBtn.addEventListener('click', () => {
 function init() {
   const now = new Date().getTime();
   
-  // デバッグ用:  年越し後の状態を確認したい場合はコメントアウト解除
-  // hasReachedNewYear = true;
-  // showCelebration();
-  // return;
-  
   if (now >= TARGET_DATE) {
     // 既に年越し済み
     hasReachedNewYear = true;
-    countdownScreen.classList.remove('active');
+    countdownScreen. classList.remove('active');
     mainScreen.classList.add('active');
     loadBalloons();
   } else {
@@ -308,3 +303,43 @@ function init() {
 }
 
 init();
+
+// ========================================
+// デバッグ用コンソールコマンド
+// ========================================
+// コンソールから triggerNewYear() で年越し演出を発火
+window.triggerNewYear = function() {
+  console.log('🎉 年越し演出を開始します！');
+  clearInterval(countdownInterval);
+  hasReachedNewYear = true;
+  showCelebration();
+};
+
+// コンソールから skipToMain() でメイン画面に直接移動
+window.skipToMain = function() {
+  console.log('📝 メイン画面にスキップします');
+  clearInterval(countdownInterval);
+  hasReachedNewYear = true;
+  countdownScreen.classList.remove('active');
+  celebrationScreen.classList.remove('active');
+  mainScreen.classList.add('active');
+  loadBalloons();
+};
+
+// コンソールから resetTest() でテストをリセット
+window.resetTest = function() {
+  console.log('🔄 テストデータをリセットします');
+  localStorage.removeItem('postCount');
+  localStorage.removeItem('omikujiDrawn');
+  location.reload();
+};
+
+// 使い方をコンソールに表示
+console.log(`
+🎊 年越しアプリ - デバッグコマンド
+================================
+triggerNewYear()  - 年越し演出を発火
+skipToMain()      - メイン画面に直接移動
+resetTest()       - LocalStorageをリセットして再読み込み
+================================
+`);
