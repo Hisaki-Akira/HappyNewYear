@@ -48,7 +48,7 @@ const secondsEl = document.getElementById('seconds');
 
 const resolutionInput = document.getElementById('resolution-input');
 const charCountEl = document.getElementById('char-count');
-const submitBtn = document.getElementById('submit-btn');
+const submitBtn = document. getElementById('submit-btn');
 const submitMessage = document.getElementById('submit-message');
 
 const omikujiSection = document.getElementById('omikuji-section');
@@ -58,7 +58,7 @@ const omikujiResult = document.getElementById('omikuji-result');
 const balloonsContainer = document.getElementById('balloons-container');
 const modal = document.getElementById('modal');
 const modalText = document.getElementById('modal-text');
-const modalClose = document.getElementById('modal-close');
+const modalClose = document. getElementById('modal-close');
 
 // ========================================
 // カウントダウン処理
@@ -75,9 +75,9 @@ function updateCountdown() {
   }
 
   const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  const hours = Math. floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  const minutes = Math. floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  const seconds = Math. floor((distance % (1000 * 60)) / 1000);
+  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
   daysEl.textContent = String(days).padStart(2, '0');
   hoursEl.textContent = String(hours).padStart(2, '0');
@@ -113,7 +113,7 @@ function showCelebration() {
     setTimeout(() => {
       const confetti = document.createElement('div');
       confetti.className = 'confetti-piece';
-      confetti.style. left = Math.random() * 100 + '%';
+      confetti.style.left = Math.random() * 100 + '%';
       confetti.style.background = `hsl(${Math.random() * 360}, 100%, 70%)`;
       confetti.style.animationDelay = Math.random() * 0.5 + 's';
       confettiContainer.appendChild(confetti);
@@ -147,7 +147,7 @@ submitBtn.addEventListener('click', async () => {
   }
 
   if (text.length > 40) {
-    submitMessage. textContent = '40文字以内で入力してください';
+    submitMessage.textContent = '40文字以内で入力してください';
     submitMessage.style.color = '#e74c3c';
     return;
   }
@@ -178,7 +178,7 @@ submitBtn.addEventListener('click', async () => {
     charCountEl.textContent = '0';
     
     // おみくじ表示
-    omikujiSection.classList. remove('hidden');
+    omikujiSection.classList.remove('hidden');
     
     // バルーン再読み込み
     loadBalloons();
@@ -188,14 +188,14 @@ submitBtn.addEventListener('click', async () => {
       submitBtn.textContent = '投稿完了';
     } else {
       setTimeout(() => {
-        submitBtn. disabled = false;
-        submitMessage.textContent = '';
+        submitBtn.disabled = false;
+        submitMessage. textContent = '';
       }, 2000);
     }
   } catch (error) {
     console.error('Error adding document:', error);
     submitMessage.textContent = 'エラーが発生しました';
-    submitMessage.style. color = '#e74c3c';
+    submitMessage.style.color = '#e74c3c';
     submitBtn.disabled = false;
   }
 });
@@ -212,7 +212,7 @@ async function loadBalloons() {
     
     querySnapshot.forEach((document) => {
       const data = document.data();
-      createBalloon(data.text);
+      createBalloon(data. text);
     });
   } catch (error) {
     console.error('Error loading balloons:', error);
@@ -244,13 +244,9 @@ function createBalloon(text) {
   balloon.style.left = `${x}px`;
   balloon.style.top = `${y}px`;
 
-  // 色
+  // 色（radial-gradientを設定）
   const hue = Math.random() * 360;
-  balloon.style.background = `
-    radial-gradient(circle at 30% 30%,
-      hsla(${hue}, 80%, 85%, 0.9),
-      hsla(${hue}, 80%, 60%, 0.75))
-  `;
+  balloon.style. background = `radial-gradient(circle at 30% 30%, hsla(${hue}, 80%, 85%, 0.9), hsla(${hue}, 80%, 60%, 0.75))`;
 
   // 透け感
   balloon.style.opacity = (0.75 + Math.random() * 0.25).toFixed(2);
@@ -259,8 +255,8 @@ function createBalloon(text) {
   balloon.style.animationDelay = `${Math.random() * 5}s`;
   balloon.style.animationDuration = `${12 + Math.random() * 10}s`;
 
+  // クリックイベント
   balloon.addEventListener('click', () => {
-    balloon.classList.add('pop');
     modalText.textContent = text;
     modal.classList.remove('hidden');
   });
@@ -269,7 +265,7 @@ function createBalloon(text) {
 }
 
 // モーダル閉じる
-modalClose. addEventListener('click', () => {
+modalClose.addEventListener('click', () => {
   modal.classList.add('hidden');
 });
 
@@ -290,14 +286,14 @@ omikujiBtn.addEventListener('click', () => {
 
   const fortunes = [
     { level: '大吉', message: '素晴らしい一年になるでしょう！夢に向かって突き進む年です。' },
-    { level:  '中吉', message: '良いことがたくさん訪れます。前向きな気持ちを大切に。' },
+    { level: '中吉', message: '良いことがたくさん訪れます。前向きな気持ちを大切に。' },
     { level: '小吉', message: '小さな幸せが積み重なる年。感謝の心を忘れずに。' },
     { level: '吉', message: '穏やかで心地よい一年。周りの人を大切にしましょう。' },
     { level: '末吉', message: '努力が実を結ぶ年。焦らずコツコツと進みましょう。' },
     { level: '凶', message: '試練を乗り越えた先に成長があります。諦めない心が大切です。' }
   ];
 
-  const result = fortunes[Math.floor(Math.random() * fortunes.length)];
+  const result = fortunes[Math.floor(Math. random() * fortunes.length)];
   
   omikujiResult.innerHTML = `
     <h3>${result.level}</h3>
