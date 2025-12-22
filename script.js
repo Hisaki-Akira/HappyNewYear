@@ -15,12 +15,12 @@ import {
 } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js';
 
 const firebaseConfig = {
-  apiKey:  "AIzaSyDPE7Lv9qxh1BqTvfESMcn1OlaI9pA-t-Q",
+  apiKey: "AIzaSyDPE7Lv9qxh1BqTvfESMcn1OlaI9pA-t-Q",
   authDomain: "newyearproject-8be53.firebaseapp.com",
   projectId: "newyearproject-8be53",
-  storageBucket:  "newyearproject-8be53.firebasestorage. app",
+  storageBucket: "newyearproject-8be53.firebasestorage.app",
   messagingSenderId: "541999984164",
-  appId: "1:541999984164:web:7d2038d3e8cec6264572b1",
+  appId: "1:541999984164:web: 7d2038d3e8cec6264572b1",
   measurementId: "G-14RNPP91J8"
 };
 
@@ -38,12 +38,12 @@ let hasReachedNewYear = false;
 // 画面要素取得
 // ========================================
 const countdownScreen = document.getElementById('countdown-screen');
-const celebrationScreen = document. getElementById('celebration-screen');
+const celebrationScreen = document.getElementById('celebration-screen');
 const mainScreen = document.getElementById('main-screen');
 
-const daysEl = document. getElementById('days');
+const daysEl = document.getElementById('days');
 const hoursEl = document.getElementById('hours');
-const minutesEl = document. getElementById('minutes');
+const minutesEl = document.getElementById('minutes');
 const secondsEl = document.getElementById('seconds');
 
 const resolutionInput = document.getElementById('resolution-input');
@@ -67,7 +67,7 @@ function updateCountdown() {
   const now = new Date().getTime();
   const distance = TARGET_DATE - now;
 
-  if (distance <= 0 && ! hasReachedNewYear) {
+  if (distance <= 0 && !hasReachedNewYear) {
     clearInterval(countdownInterval);
     hasReachedNewYear = true;
     showCelebration();
@@ -96,11 +96,11 @@ function showCelebration() {
   const fireworksContainer = document.getElementById('fireworks');
   for (let i = 0; i < 15; i++) {
     setTimeout(() => {
-      const firework = document. createElement('div');
+      const firework = document.createElement('div');
       firework.className = 'firework';
-      firework. style.left = Math.random() * 100 + '%';
-      firework.style.top = Math.random() * 60 + '%';
-      firework. style.background = `hsl(${Math.random() * 360}, 100%, 60%)`;
+      firework.style.left = Math. random() * 100 + '%';
+      firework.style. top = Math.random() * 60 + '%';
+      firework.style. background = `hsl(${Math.random() * 360}, 100%, 60%)`;
       fireworksContainer.appendChild(firework);
       
       setTimeout(() => firework.remove(), 1000);
@@ -113,7 +113,7 @@ function showCelebration() {
     setTimeout(() => {
       const confetti = document.createElement('div');
       confetti.className = 'confetti-piece';
-      confetti.style.left = Math.random() * 100 + '%';
+      confetti.style. left = Math.random() * 100 + '%';
       confetti.style.background = `hsl(${Math.random() * 360}, 100%, 70%)`;
       confetti.style.animationDelay = Math.random() * 0.5 + 's';
       confettiContainer.appendChild(confetti);
@@ -125,7 +125,7 @@ function showCelebration() {
   // 3秒後にメイン画面へ
   setTimeout(() => {
     celebrationScreen.classList.remove('active');
-    mainScreen.classList.add('active');
+    mainScreen.classList. add('active');
     loadBalloons();
   }, 3000);
 }
@@ -141,13 +141,13 @@ submitBtn.addEventListener('click', async () => {
   const text = resolutionInput.value. trim();
   
   if (!text) {
-    submitMessage. textContent = '抱負を入力してください';
+    submitMessage.textContent = '抱負を入力してください';
     submitMessage.style.color = '#e74c3c';
     return;
   }
 
   if (text.length > 40) {
-    submitMessage.textContent = '40文字以内で入力してください';
+    submitMessage. textContent = '40文字以内で入力してください';
     submitMessage.style.color = '#e74c3c';
     return;
   }
@@ -156,13 +156,13 @@ submitBtn.addEventListener('click', async () => {
   const postCount = parseInt(localStorage.getItem('postCount') || '0');
   if (postCount >= 2) {
     submitMessage.textContent = '投稿は2回までです';
-    submitMessage. style.color = '#e74c3c';
+    submitMessage.style.color = '#e74c3c';
     return;
   }
 
   submitBtn.disabled = true;
-  submitMessage. textContent = '送信中... ';
-  submitMessage.style. color = '#3498db';
+  submitMessage.textContent = '送信中...';
+  submitMessage.style.color = '#3498db';
 
   try {
     await addDoc(collection(db, 'resolutions'), {
@@ -173,12 +173,12 @@ submitBtn.addEventListener('click', async () => {
     localStorage.setItem('postCount', String(postCount + 1));
     
     submitMessage.textContent = '✨ 抱負を送信しました！';
-    submitMessage.style. color = '#27ae60';
+    submitMessage.style.color = '#27ae60';
     resolutionInput.value = '';
     charCountEl.textContent = '0';
     
     // おみくじ表示
-    omikujiSection.classList.remove('hidden');
+    omikujiSection.classList. remove('hidden');
     
     // バルーン再読み込み
     loadBalloons();
@@ -188,14 +188,14 @@ submitBtn.addEventListener('click', async () => {
       submitBtn.textContent = '投稿完了';
     } else {
       setTimeout(() => {
-        submitBtn.disabled = false;
+        submitBtn. disabled = false;
         submitMessage.textContent = '';
       }, 2000);
     }
   } catch (error) {
-    console.error('Error adding document: ', error);
+    console.error('Error adding document:', error);
     submitMessage.textContent = 'エラーが発生しました';
-    submitMessage.style.color = '#e74c3c';
+    submitMessage.style. color = '#e74c3c';
     submitBtn.disabled = false;
   }
 });
@@ -210,46 +210,71 @@ async function loadBalloons() {
     
     balloonsContainer.innerHTML = '';
     
-    querySnapshot.forEach((doc) => {
-      const data = doc. data();
+    querySnapshot.forEach((document) => {
+      const data = document.data();
       createBalloon(data.text);
     });
   } catch (error) {
-    console.error('Error loading balloons: ', error);
+    console.error('Error loading balloons:', error);
   }
 }
 
 function createBalloon(text) {
   const balloon = document.createElement('div');
   balloon.className = 'balloon';
-  
-  // ランダム配置
-  balloon.style.left = Math.random() * (window.innerWidth - 80) + 'px';
-  balloon.style. top = Math.random() * (window.innerHeight - 100) + 'px';
-  
-  // ランダム色
+
+  const screenW = window.innerWidth;
+  const screenH = window.innerHeight;
+
+  // 左右どちらに出すか
+  const side = Math.random() < 0.5 ? 'left' : 'right';
+
+  // 中央を避けるための余白
+  const margin = screenW * 0.25; // 25%空ける
+
+  let x;
+  if (side === 'left') {
+    x = Math.random() * (margin - 80);
+  } else {
+    x = screenW - margin + Math.random() * (margin - 80);
+  }
+
+  const y = Math.random() * (screenH - 120);
+
+  balloon.style.left = `${x}px`;
+  balloon.style.top = `${y}px`;
+
+  // 色
   const hue = Math.random() * 360;
-  balloon.style.background = `radial-gradient(circle at 30% 30%, hsla(${hue}, 80%, 80%, 0.9), hsla(${hue}, 80%, 60%, 0.7))`;
-  
-  // ランダムアニメーション遅延
-  balloon.style.animationDelay = Math.random() * 5 + 's';
-  balloon.style.animationDuration = (10 + Math.random() * 10) + 's';
-  
+  balloon.style.background = `
+    radial-gradient(circle at 30% 30%,
+      hsla(${hue}, 80%, 85%, 0.9),
+      hsla(${hue}, 80%, 60%, 0.75))
+  `;
+
+  // 透け感
+  balloon.style.opacity = (0.75 + Math.random() * 0.25).toFixed(2);
+
+  // アニメーション個体差
+  balloon.style.animationDelay = `${Math.random() * 5}s`;
+  balloon.style.animationDuration = `${12 + Math.random() * 10}s`;
+
   balloon.addEventListener('click', () => {
+    balloon.classList.add('pop');
     modalText.textContent = text;
-    modal.classList. remove('hidden');
+    modal.classList.remove('hidden');
   });
-  
-  balloonsContainer. appendChild(balloon);
+
+  balloonsContainer.appendChild(balloon);
 }
 
 // モーダル閉じる
-modalClose.addEventListener('click', () => {
+modalClose. addEventListener('click', () => {
   modal.classList.add('hidden');
 });
 
 modal.addEventListener('click', (e) => {
-  if (e.target === modal) {
+  if (e. target === modal) {
     modal.classList.add('hidden');
   }
 });
@@ -264,21 +289,21 @@ omikujiBtn.addEventListener('click', () => {
   }
 
   const fortunes = [
-    { level:  '大吉', message: '素晴らしい一年になるでしょう！夢に向かって突き進む年です。' },
-    { level: '中吉', message: '良いことがたくさん訪れます。前向きな気持ちを大切に。' },
+    { level: '大吉', message: '素晴らしい一年になるでしょう！夢に向かって突き進む年です。' },
+    { level:  '中吉', message: '良いことがたくさん訪れます。前向きな気持ちを大切に。' },
     { level: '小吉', message: '小さな幸せが積み重なる年。感謝の心を忘れずに。' },
     { level: '吉', message: '穏やかで心地よい一年。周りの人を大切にしましょう。' },
     { level: '末吉', message: '努力が実を結ぶ年。焦らずコツコツと進みましょう。' },
-    { level: '凶', message:  '試練を乗り越えた先に成長があります。諦めない心が大切です。' }
+    { level: '凶', message: '試練を乗り越えた先に成長があります。諦めない心が大切です。' }
   ];
 
   const result = fortunes[Math.floor(Math.random() * fortunes.length)];
   
   omikujiResult.innerHTML = `
     <h3>${result.level}</h3>
-    <p>${result. message}</p>
+    <p>${result.message}</p>
   `;
-  omikujiResult. classList.remove('hidden');
+  omikujiResult.classList.remove('hidden');
   
   localStorage.setItem('omikujiDrawn', 'true');
   omikujiBtn.disabled = true;
@@ -294,7 +319,7 @@ function init() {
   if (now >= TARGET_DATE) {
     // 既に年越し済み
     hasReachedNewYear = true;
-    countdownScreen. classList.remove('active');
+    countdownScreen.classList.remove('active');
     mainScreen.classList.add('active');
     loadBalloons();
   } else {
@@ -325,7 +350,7 @@ window.skipToMain = function() {
   hasReachedNewYear = true;
   countdownScreen.classList.remove('active');
   celebrationScreen.classList.remove('active');
-  mainScreen.classList. add('active');
+  mainScreen.classList.add('active');
   loadBalloons();
 };
 
