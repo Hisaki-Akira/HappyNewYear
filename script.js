@@ -1,7 +1,7 @@
 // ========================================
 // Firebase設定
 // ========================================
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js';
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-app. js';
 import { 
   getFirestore, 
   collection, 
@@ -9,7 +9,9 @@ import {
   getDocs, 
   serverTimestamp,
   query,
-  orderBy 
+  orderBy,
+  deleteDoc,
+  doc
 } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js';
 
 const firebaseConfig = {
@@ -36,7 +38,7 @@ let hasReachedNewYear = false;
 // 画面要素取得
 // ========================================
 const countdownScreen = document.getElementById('countdown-screen');
-const celebrationScreen = document.getElementById('celebration-screen');
+const celebrationScreen = document. getElementById('celebration-screen');
 const mainScreen = document.getElementById('main-screen');
 
 const daysEl = document. getElementById('days');
@@ -307,6 +309,7 @@ init();
 // ========================================
 // デバッグ用コンソールコマンド
 // ========================================
+
 // コンソールから triggerNewYear() で年越し演出を発火
 window.triggerNewYear = function() {
   console.log('🎉 年越し演出を開始します！');
@@ -322,7 +325,7 @@ window.skipToMain = function() {
   hasReachedNewYear = true;
   countdownScreen.classList.remove('active');
   celebrationScreen.classList.remove('active');
-  mainScreen.classList.add('active');
+  mainScreen.classList. add('active');
   loadBalloons();
 };
 
@@ -334,12 +337,49 @@ window.resetTest = function() {
   location.reload();
 };
 
+// コンソールから clearResolutions() でFirestoreの抱負を全削除
+window.clearResolutions = async function() {
+  const confirmed = confirm('⚠️ Firestoreの全抱負データを削除しますか？');
+  if (!confirmed) {
+    console.log('❌ キャンセルしました');
+    return;
+  }
+  
+  console.log('🗑️ 抱負データを削除中...');
+  
+  try {
+    const q = query(collection(db, 'resolutions'));
+    const querySnapshot = await getDocs(q);
+    
+    let deleteCount = 0;
+    const deletePromises = [];
+    
+    querySnapshot.forEach((document) => {
+      deletePromises.push(deleteDoc(doc(db, 'resolutions', document.id)));
+      deleteCount++;
+    });
+    
+    await Promise.all(deletePromises);
+    
+    console.log(`✅ ${deleteCount}件の抱負を削除しました`);
+    
+    // バルーンを再読み込み
+    balloonsContainer.innerHTML = '';
+    
+    alert(`${deleteCount}件の抱負を削除しました`);
+  } catch (error) {
+    console.error('❌ 削除エラー:', error);
+    alert('削除に失敗しました:  ' + error.message);
+  }
+};
+
 // 使い方をコンソールに表示
 console.log(`
 🎊 年越しアプリ - デバッグコマンド
 ================================
-triggerNewYear()  - 年越し演出を発火
-skipToMain()      - メイン画面に直接移動
-resetTest()       - LocalStorageをリセットして再読み込み
+triggerNewYear()      - 年越し演出を発火
+skipToMain()          - メイン画面に直接移動
+resetTest()           - LocalStorageをリセットして再読み込み
+clearResolutions()    - Firestoreの全抱負データを削除
 ================================
 `);
