@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>年越しカウントダウン 2026</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- カウントダウン画面 -->
+  <div id="countdown-screen" class="screen active">
+    <h1>2026年まで</h1>
+    <div id="countdown" class="countdown">
+      <div class="time-unit">
+        <span id="days" class="time-value">00</span>
+        <span class="time-label">日</span>
+      </div>
+      <div class="time-unit">
+        <span id="hours" class="time-value">00</span>
+        <span class="time-label">時間</span>
+      </div>
+      <div class="time-unit">
+        <span id="minutes" class="time-value">00</span>
+        <span class="time-label">分</span>
+      </div>
+      <div class="time-unit">
+        <span id="seconds" class="time-value">00</span>
+        <span class="time-label">秒</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 年越し演出画面 -->
+  <div id="celebration-screen" class="screen">
+    <h1 class="celebration-title">Happy New Year 2026! </h1>
+    <div id="fireworks"></div>
+    <div id="confetti"></div>
+  </div>
+
+  <!-- メイン画面（年越し後） -->
+  <div id="main-screen" class="screen">
+    <h1>🎍 新年おめでとうございます 🎍</h1>
+    
+    <!-- 抱負入力エリア -->
+    <div id="resolution-form" class="card">
+      <h2>今年の抱負を書こう</h2>
+      <p class="description">あなたの2026年の抱負を一言で！</p>
+      <textarea id="resolution-input" maxlength="40" placeholder="例：毎日笑顔で過ごす"></textarea>
+      <div class="char-count"><span id="char-count">0</span> / 40</div>
+      <button id="submit-btn" class="btn-primary">送信する</button>
+      <p id="submit-message" class="message"></p>
+    </div>
+
+    <!-- おみくじエリア -->
+    <div id="omikuji-section" class="card hidden">
+      <h2>🎴 新年おみくじ</h2>
+      <p class="description">あなたの今年の運勢は... ?</p>
+      <button id="omikuji-btn" class="btn-secondary">おみくじを引く</button>
+      <div id="omikuji-result" class="omikuji-result hidden"></div>
+    </div>
+
+    <!-- 抱負バルーン表示エリア -->
+    <div id="balloons-container" class="balloons-container"></div>
+  </div>
+
+  <!-- バルーン詳細モーダル -->
+  <div id="modal" class="modal hidden">
+    <div class="modal-content">
+      <span id="modal-close" class="modal-close">&times;</span>
+      <p id="modal-text"></p>
+    </div>
+  </div>
+
+  <!-- Firebase SDK (v9 modular) -->
+  <script type="module" src="script.js"></script>
+</body>
+</html>
