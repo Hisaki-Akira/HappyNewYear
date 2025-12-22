@@ -28,12 +28,12 @@ body {
 
 /* カウントダウン画面 */
 #countdown-screen h1 {
-  font-size: 2.5rem;
+  font-size:  2.5rem;
   margin-bottom: 40px;
   text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
 }
 
-. countdown {
+.countdown {
   display: flex;
   gap: 20px;
   flex-wrap: wrap;
@@ -83,7 +83,7 @@ body {
 /* 花火 */
 #fireworks {
   position: absolute;
-  top: 0;
+  top:  0;
   left:  0;
   width: 100%;
   height: 100%;
@@ -107,10 +107,10 @@ body {
 #confetti {
   position: absolute;
   top: 0;
-  left:  0;
-  width: 100%;
+  left: 0;
+  width:  100%;
   height: 100%;
-  pointer-events: none;
+  pointer-events:  none;
 }
 
 .confetti-piece {
@@ -137,7 +137,7 @@ body {
 
 #main-screen h1 {
   font-size: 2rem;
-  margin-bottom: 30px;
+  margin-bottom:  30px;
   text-shadow: 2px 2px 8px rgba(0,0,0,0.2);
 }
 
@@ -153,7 +153,7 @@ body {
 }
 
 .card h2 {
-  font-size: 1.5rem;
+  font-size:  1.5rem;
   margin-bottom: 10px;
   color: #667eea;
 }
@@ -161,7 +161,7 @@ body {
 .description {
   font-size: 0.9rem;
   color: #666;
-  margin-bottom: 20px;
+  margin-bottom:  20px;
 }
 
 textarea {
@@ -176,7 +176,7 @@ textarea {
   transition: border 0.3s;
 }
 
-textarea:focus {
+textarea: focus {
   outline: none;
   border-color: #667eea;
 }
@@ -191,17 +191,17 @@ textarea:focus {
 .btn-primary, .btn-secondary {
   width: 100%;
   padding:  15px;
-  border: none;
-  border-radius: 10px;
-  font-size:  1.1rem;
+  border:  none;
+  border-radius:  10px;
+  font-size: 1.1rem;
   font-weight: bold;
   cursor: pointer;
   margin-top: 15px;
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.btn-primary {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+. btn-primary {
+  background:  linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: #fff;
 }
 
@@ -210,7 +210,7 @@ textarea:focus {
   color: #fff;
 }
 
-.btn-primary:hover, . btn-secondary:hover {
+.btn-primary:hover, .btn-secondary:hover {
   transform: translateY(-2px);
   box-shadow: 0 5px 20px rgba(0,0,0,0.3);
 }
@@ -222,7 +222,7 @@ textarea:focus {
 }
 
 . message {
-  margin-top: 15px;
+  margin-top:  15px;
   font-size: 0.9rem;
   text-align: center;
 }
@@ -232,7 +232,7 @@ textarea:focus {
 }
 
 /* おみくじ結果 */
-. omikuji-result {
+.omikuji-result {
   margin-top: 20px;
   padding: 20px;
   background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
@@ -247,25 +247,25 @@ textarea:focus {
 }
 
 .omikuji-result p {
-  font-size:  1rem;
+  font-size: 1rem;
   color: #2d3436;
   line-height: 1.6;
 }
 
 /* バルーン表示 */
 .balloons-container {
-  position:  fixed;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height:  100%;
   pointer-events: none;
   z-index: 5;
 }
 
-.balloon {
+. balloon {
   position: absolute;
-  width:  80px;
+  width: 80px;
   height: 100px;
   background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.9), rgba(255,255,255,0.6));
   border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
@@ -280,14 +280,14 @@ textarea:focus {
   transform:  scale(1.1);
 }
 
-. balloon.pop {
-  animation:  popAnimation 0.3s ease-out forwards;
+.balloon.pop {
+  animation: popAnimation 0.3s ease-out forwards;
 }
 
 @keyframes popAnimation {
   0% { transform: scale(1); }
   50% { transform: scale(1.2); }
-  100% { transform: scale(1); }
+  100% { transform:  scale(1); }
 }
 
 @keyframes float {
@@ -320,7 +320,7 @@ textarea:focus {
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease;
-  backdrop-filter: blur(5px);
+  backdrop-filter:  blur(5px);
 }
 
 .modal:not(.hidden) {
@@ -330,13 +330,13 @@ textarea:focus {
 
 .modal-content {
   background: #fff;
-  padding: 40px 30px;
+  padding: 50px 40px;
   border-radius:  20px;
-  max-width: 500px;
+  max-width: 600px;
   width: 90%;
   position: relative;
   color: #333;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  box-shadow:  0 20px 60px rgba(0,0,0,0.5);
   transform: scale(0.8);
   transition: transform 0.3s ease;
 }
@@ -348,7 +348,7 @@ textarea:focus {
 
 @keyframes modalBounce {
   0% { transform: scale(0.8); }
-  50% { transform: scale(1.05); }
+  50% { transform:  scale(1.05); }
   100% { transform: scale(1); }
 }
 
@@ -356,14 +356,14 @@ textarea:focus {
   position: absolute;
   top: 15px;
   right: 20px;
-  font-size:  2rem;
+  font-size: 2.5rem;
   cursor: pointer;
   color: #999;
   transition: color 0.3s, transform 0.2s;
-  font-weight: bold;
-  line-height: 1;
-  width: 30px;
-  height: 30px;
+  font-weight:  bold;
+  line-height:  1;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -375,22 +375,93 @@ textarea:focus {
 }
 
 #modal-text {
-  font-size: 1.3rem;
-  line-height: 1.8;
+  font-size:  1.6rem;
+  line-height:  2;
   text-align: center;
   color: #2d3436;
   font-weight: 500;
-  padding: 10px;
-  min-height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  padding:  20px;
+  min-height:  80px;
+  display:  flex;
+  align-items:  center;
+  justify-content:  center;
 }
 
-/* レスポンシブ */
+/* PC用の大きめ表示 */
+@media (min-width: 769px) {
+  .card {
+    max-width: 600px;
+    padding: 40px;
+  }
+  
+  .card h2 {
+    font-size: 1.8rem;
+  }
+  
+  textarea {
+    font-size: 1.1rem;
+    min-height: 100px;
+  }
+  
+  .btn-primary, .btn-secondary {
+    font-size: 1.2rem;
+    padding: 18px;
+  }
+  
+  . balloon {
+    width: 100px;
+    height: 120px;
+  }
+  
+  #main-screen h1 {
+    font-size: 2.5rem;
+  }
+  
+  #countdown-screen h1 {
+    font-size: 3rem;
+  }
+  
+  . time-value {
+    font-size: 5rem;
+  }
+  
+  .time-label {
+    font-size: 1.2rem;
+  }
+  
+  .modal-content {
+    max-width: 700px;
+    padding: 60px 50px;
+  }
+  
+  #modal-text {
+    font-size: 2rem;
+    line-height: 2.2;
+    padding: 30px;
+  }
+  
+  .modal-close {
+    font-size: 3rem;
+    width: 50px;
+    height: 50px;
+  }
+}
+
+/* タブレット */
+@media (min-width: 601px) and (max-width: 768px) {
+  .modal-content {
+    max-width: 550px;
+  }
+  
+  #modal-text {
+    font-size: 1.4rem;
+  }
+}
+
+/* スマホ */
 @media (max-width: 600px) {
   .time-value {
-    font-size: 2. 5rem;
+    font-size: 2.5rem;
   }
   
   .celebration-title {
@@ -405,7 +476,7 @@ textarea:focus {
     padding: 20px;
   }
   
-  . balloon {
+  .balloon {
     width: 60px;
     height: 80px;
   }
@@ -417,5 +488,12 @@ textarea:focus {
   
   #modal-text {
     font-size: 1.1rem;
+    padding: 10px;
+  }
+  
+  .modal-close {
+    font-size: 2rem;
+    width: 30px;
+    height: 30px;
   }
 }
