@@ -280,20 +280,37 @@ h1, h2 {
   color: #fefefe;
 }
 
-/* スマホ */
-@media (max-width: 600px) {
-  .time-value {
-    font-size: 2.5rem;
+/* スマホ向け調整：横一列に収まるよう縮小 */
+@media (max-width: 520px) {
+  .countdown {
+    flex-wrap: nowrap;
+    gap: 10px;
   }
   .time-unit {
-    padding: 15px 20px;
-    min-width: 70px;
+    padding: 10px 14px;
+    min-width: 64px;
   }
-  .balloon {
-    width: 60px;
-    height: 80px;
+  .time-value {
+    font-size: 2.3rem;
   }
-  .celebration-title {
-    font-size: 2.1rem;
+  .time-label {
+    font-size: 0.85rem;
+  }
+}
+
+/* さらに小さい端末向けの微調整 */
+@media (max-width: 420px) {
+  .countdown {
+    gap: 8px;
+  }
+  .time-unit {
+    padding: 9px 12px;
+    min-width: 60px;
+  }
+  .time-value {
+    font-size: 2rem;
+  }
+  .time-label {
+    font-size: 0.8rem;
   }
 }
