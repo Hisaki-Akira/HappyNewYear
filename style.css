@@ -32,7 +32,7 @@ h1, h2 {
 
 /* カード */
 .card {
-  background: rgba(10, 12, 28, 0.72);               /* 濃色＋透過でコントラストUP */
+  background: rgba(10, 12, 28, 0.72);
   color: #f6f6ff;
   padding: 30px;
   border-radius: 20px;
@@ -41,7 +41,7 @@ h1, h2 {
   width: 100%;
   max-width: 520px;
   margin-bottom: 30px;
-  border: 1px solid rgba(255,255,255,0.22);         /* 枠線で輪郭を強調 */
+  border: 1px solid rgba(255,255,255,0.22);
 }
 
 .description {
@@ -50,13 +50,21 @@ h1, h2 {
   color: #e8e8ff;
 }
 
+.notice {
+  margin-top: 8px;
+  text-align: left;
+  font-size: 0.9rem;
+  opacity: 0.78;
+  color: #f0f2ff;
+}
+
 .resolution-input {
   width: 100%;
   min-height: 120px;
   padding: 14px;
   border-radius: 14px;
   border: 1px solid rgba(255,255,255,0.32);
-  background: rgba(255,255,255,0.10);               /* 入力欄の背景も濃淡差を確保 */
+  background: rgba(255,255,255,0.10);
   color: #f6f6ff;
   font-size: 1rem;
   resize: vertical;
@@ -266,7 +274,7 @@ h1, h2 {
   margin-top: 15px;
   padding: 16px;
   border-radius: 12px;
-  background: rgba(255,255,255,0.12);               /* カードより少し明るめの面 */
+  background: rgba(255,255,255,0.12);
   border: 1px solid rgba(255,255,255,0.26);
   font-size: 1.1rem;
   color: #fefefe;
