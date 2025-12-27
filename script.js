@@ -7,7 +7,8 @@ import {
   deleteDoc,
   serverTimestamp,
   query,
-  orderBy
+  orderBy,
+  doc
 } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -23,6 +24,7 @@ const TARGET_DATE = new Date("2026-01-01T00:00:00").getTime();
 const RESOLUTION_LIMIT = 2;
 const RESOLUTION_COUNT_KEY = "ny2026_resolution_count";
 const OMIKUJI_DONE_KEY = "ny2026_omikuji_done";
+const isAdminMode = new URLSearchParams(location.search).get("admin") === "1";
 
 const countdownScreen = document.getElementById("countdown-screen");
 const celebrationScreen = document.getElementById("celebration-screen");
@@ -200,19 +202,19 @@ async function handleSubmit() {
   }
 }
 
-/* ========== バルーン表示 ========== */
+/* ========== バルーン表示（削除ボタンは admin=1 のときのみ） ========== */
 async function loadBalloons() {
   balloonsContainer.innerHTML = "";
   try {
     const q = query(collection(db, "resolutions"), orderBy("createdAt", "desc"));
     const snap = await getDocs(q);
-    snap.forEach(doc => createBalloon(doc.data().text));
+    snap.forEach(d => createBalloon(d.id, d.data().text));
   } catch (e) {
     console.error("Failed to load balloons:", e);
   }
 }
 
-function createBalloon(text) {
+function createBalloon(id, text) {
   const balloon = document.createElement("div");
   balloon.className = "balloon";
 
@@ -222,11 +224,8 @@ function createBalloon(text) {
   const sideLeft = Math.random() < 0.5;
   const vw = window.innerWidth;
   const vh = window.innerHeight;
-  const x = sideLeft
-    ? Math.random() * 0.25 * vw
-    : vw * 0.75 + Math.random() * 0.25 * vw;
+  const x = sideLeft ? Math.random() * 0.25 * vw : vw * 0.75 + Math.random() * 0.25 * vw;
   const y = Math.random() * vh * 0.9;
-
   balloon.style.left = `${x}px`;
   balloon.style.top = `${y}px`;
 
@@ -234,6 +233,34 @@ function createBalloon(text) {
     modalText.textContent = text;
     modal.classList.remove("hidden");
   };
+
+  if (isAdminMode) {
+    const del = document.createElement("button");
+    del.textContent = "削除";
+    del.style.position = "absolute";
+    del.style.bottom = "-14px";
+    del.style.left = "50%";
+    del.style.transform = "translateX(-50%)";
+    del.style.fontSize = "0.75rem";
+    del.style.padding = "4px 8px";
+    del.style.borderRadius = "6px";
+    del.style.border = "none";
+    del.style.background = "rgba(0,0,0,0.65)";
+    del.style.color = "#fff";
+    del.style.cursor = "pointer";
+    del.onclick = async (e) => {
+      e.stopPropagation();
+      try {
+        await deleteDoc(doc(db, "resolutions", id));
+        balloon.remove();
+        console.log(`Deleted resolution: ${id}`);
+      } catch (err) {
+        console.error("Delete failed:", err);
+        alert("削除に失敗しました");
+      }
+    };
+    balloon.appendChild(del);
+  }
 
   balloonsContainer.appendChild(balloon);
 }
@@ -266,7 +293,7 @@ function drawOmikuji() {
 async function clearResolutions() {
   const snap = await getDocs(collection(db, "resolutions"));
   const promises = [];
-  snap.forEach(doc => promises.push(deleteDoc(doc.ref)));
+  snap.forEach(docu => promises.push(deleteDoc(docu.ref)));
   await Promise.all(promises);
   loadBalloons();
   console.log("All resolutions deleted (client-side).");
@@ -309,7 +336,6 @@ function init() {
   updateCountdown();
   countdownTimer = setInterval(updateCountdown, 1000);
 
-  // すでに年越し後にアクセスした場合に備える
   if (Date.now() >= TARGET_DATE) {
     clearInterval(countdownTimer);
     startCelebration();
