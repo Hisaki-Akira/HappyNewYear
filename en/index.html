@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Year Countdown 2026</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Countdown screen -->
+  <div id="countdown-screen" class="screen active">
+    <h1>Until 2026</h1>
+    <div class="countdown">
+      <div class="time-unit">
+        <span id="days" class="time-value">00</span>
+        <span class="time-label">Days</span>
+      </div>
+      <div class="time-unit">
+        <span id="hours" class="time-value">00</span>
+        <span class="time-label">Hours</span>
+      </div>
+      <div class="time-unit">
+        <span id="minutes" class="time-value">00</span>
+        <span class="time-label">Minutes</span>
+      </div>
+      <div class="time-unit">
+        <span id="seconds" class="time-value">00</span>
+        <span class="time-label">Seconds</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Celebration screen -->
+  <div id="celebration-screen" class="screen">
+    <h1 class="celebration-title">Happy New Year 2026!</h1>
+    <div id="fireworks"></div>
+    <div id="confetti"></div>
+  </div>
+
+  <!-- Main screen -->
+  <div id="main-screen" class="screen">
+    <h1>🎍 Happy New Year! 🎍</h1>
+
+    <div class="card">
+      <h2>Write Your Resolution</h2>
+      <p class="description">Share your 2026 resolution in one short line.</p>
+      <textarea id="resolution-input" class="resolution-input" maxlength="40" placeholder="Up to 40 characters"></textarea>
+      <div class="char-count"><span id="char-count">0</span> / 40</div>
+      <p class="notice">Posts are publicly visible (no names shown).</p>
+      <button id="submit-btn" class="btn-primary">Submit</button>
+      <p id="submit-message" class="message"></p>
+    </div>
+
+    <div id="omikuji-section" class="card hidden">
+      <h2>🎴 New Year Fortune</h2>
+      <button id="omikuji-btn" class="btn-secondary">Draw a Fortune</button>
+      <div id="omikuji-result" class="omikuji-result hidden"></div>
+    </div>
+
+    <div id="balloons-container" class="balloons-container"></div>
+  </div>
+
+  <!-- Modal -->
+  <div id="modal" class="modal hidden">
+    <div class="modal-content">
+      <span id="modal-close" class="modal-close">&times;</span>
+      <p id="modal-text"></p>
+    </div>
+  </div>
+
+  <script type="module" src="script.js"></script>
+</body>
+</html>
